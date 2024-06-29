@@ -5,16 +5,16 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const menuData = {
-    '2024-06-20': ['Âý½Ò ºñºö¹ä', '¹Ì¿ª µÈÀå±¹', '²Ê¹è±â ¹«Ä§', 'µþ±â ±èÄ¡'],
-    '2024-06-21': ['±èÄ¡ººÀ½¹ä', 'µÈÀåÂî°³', '°è¶õ¸»ÀÌ', '±ïµÎ±â'],
-    // Ãß°¡ µ¥ÀÌÅÍ
+    '2024-07-01': ['ì—¬ê¸°ì—', 'ê·¸ ë‚ ', 'ê¸‰ì‹ ë©”ë‰´', 'ì ì–´ë‘ê¸°'],
+    '2024-07-02': ['ê¹€ì¹˜ë³¶ìŒë°¥', 'ëœìž¥ì°Œê°œ', 'ê³„ëž€ë§ì´', 'ê¹ë‘ê¸°'],
+    // ì¶”ê°€ ë°ì´í„°
 };
 
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/api/menu/:date', (req, res) => {
     const date = req.params.date;
-    const menu = menuData[date] || ['¸Þ´º Á¤º¸°¡ ¾ø½À´Ï´Ù.'];
+    const menu = menuData[date] || ['ë©”ë‰´ ì •ë³´ê°€ ì—†ìŠµë‹ˆë‹¤.'];
     res.json({ menu });
 });
 
