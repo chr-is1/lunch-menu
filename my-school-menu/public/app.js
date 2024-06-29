@@ -1,4 +1,3 @@
-// 현재 날짜를 YYYY-MM-DD 형식으로 반환하는 함수
 function getCurrentDate() {
     const today = new Date();
     const year = today.getFullYear();
@@ -7,7 +6,6 @@ function getCurrentDate() {
     return `${year}-${month}-${day}`;
 }
 
-// 날짜 포맷을 원하는 형식으로 변환하는 함수
 function formatDate(dateStr) {
     const [year, month, day] = dateStr.split('-');
     return `${month}월 ${day}일`;
@@ -19,7 +17,7 @@ function fetchMenu(date) {
         .then(response => response.json())
         .then(data => {
             const menuList = document.getElementById('menu-list');
-            menuList.innerHTML = ''; // 기존 메뉴를 지우고
+            menuList.innerHTML = '';
 
             data.menu.forEach(item => {
                 const menuItem = document.createElement('p');
@@ -63,5 +61,4 @@ function init() {
     });
 }
 
-// DOMContentLoaded 이벤트가 발생하면 init 함수 실행
 document.addEventListener('DOMContentLoaded', init);
