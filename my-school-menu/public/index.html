@@ -1,4 +1,3 @@
-Add-Content public\index.html @"
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -22,18 +21,18 @@ Add-Content public\index.html @"
         <div class="content--container">
             <div class="header--container">
                 <div class="logo-section">
-                    <img src="./img/logo.png" alt="no image found" class="logo">
+                    <img src="./img/logo.png" alt="용인 홍천고등학교 로고" class="logo">
                     <h1 class="text-title">홍 점 메</h1>
                 </div>
                 <div class="configuration-section clearfix">
                     <div class="float--left">
-                        <div class="btn" id="prev-day"><img src="./img/icon-left.png" alt="No-image" class="img-arrow"></div>
+                        <div class="btn" id="prev-day"><img src="./img/icon-left.png" alt="이전 날짜" class="img-arrow"></div>
                     </div>
                     <div class="date--information">
                         <h2 class="text-date" id="current-date">4월 19일</h2>
                     </div>
                     <div class="float--right">
-                        <div class="btn" id="next-day"><img src="./img/icon-right.png" alt="No-image" class="img-arrow"></div>
+                        <div class="btn" id="next-day"><img src="./img/icon-right.png" alt="다음 날짜" class="img-arrow"></div>
                     </div>
                 </div>
             </div>
@@ -41,10 +40,7 @@ Add-Content public\index.html @"
                 <div class="today-menu-wraper">
                     <p class="text-main text-main-top"><점심 메뉴></p>
                     <div id="menu-list">
-                        <p class="text-main">찹쌀 비빔밥</p>
-                        <p class="text-main">미역 된장국</p>
-                        <p class="text-main">꽈배기 무침</p>
-                        <p class="text-main">딸기 김치</p>
+                        <!-- 여기에 메뉴 아이템이 동적으로 추가될 예정 -->
                     </div>
                 </div>
                 <p class="text-credit top">주도성 프로젝트 2024 @YCK08</p>
@@ -55,4 +51,3 @@ Add-Content public\index.html @"
     <script src="app.js"></script>
 </body>
 </html>
-"@
