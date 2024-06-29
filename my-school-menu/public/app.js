@@ -1,4 +1,4 @@
-// ÇöÀç ³¯Â¥¸¦ YYYY-MM-DD Çü½ÄÀ¸·Î ¹İÈ¯ÇÏ´Â ÇÔ¼ö
+// í˜„ì¬ ë‚ ì§œë¥¼ YYYY-MM-DD í˜•ì‹ìœ¼ë¡œ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜
 function getCurrentDate() {
     const today = new Date();
     const year = today.getFullYear();
@@ -7,19 +7,19 @@ function getCurrentDate() {
     return `${year}-${month}-${day}`;
 }
 
-// ³¯Â¥ Æ÷¸ËÀ» ¿øÇÏ´Â Çü½ÄÀ¸·Î º¯È¯ÇÏ´Â ÇÔ¼ö
+// ë‚ ì§œ í¬ë§·ì„ ì›í•˜ëŠ” í˜•ì‹ìœ¼ë¡œ ë³€í™˜í•˜ëŠ” í•¨ìˆ˜
 function formatDate(dateStr) {
     const [year, month, day] = dateStr.split('-');
-    return `${month}¿ù ${day}ÀÏ`;
+    return `${month}ì›” ${day}ì¼`;
 }
 
-// ¼­¹ö¿¡¼­ ¸Ş´º µ¥ÀÌÅÍ¸¦ °¡Á®¿À´Â ÇÔ¼ö
+// ì„œë²„ì—ì„œ ë©”ë‰´ ë°ì´í„°ë¥¼ ê°€ì ¸ì˜¤ëŠ” í•¨ìˆ˜
 function fetchMenu(date) {
     fetch(`/api/menu/${date}`)
         .then(response => response.json())
         .then(data => {
             const menuList = document.getElementById('menu-list');
-            menuList.innerHTML = ''; // ±âÁ¸ ¸Ş´º¸¦ Áö¿ì°í
+            menuList.innerHTML = ''; // ê¸°ì¡´ ë©”ë‰´ë¥¼ ì§€ìš°ê³ 
 
             data.menu.forEach(item => {
                 const menuItem = document.createElement('p');
@@ -33,35 +33,43 @@ function fetchMenu(date) {
         .catch(error => console.error('Error fetching menu:', error));
 }
 
-// ÀÌÀü ³¯Â¥¸¦ ¼±ÅÃÇÏ´Â ÇÔ¼ö
+// ì´ì „ ë‚ ì§œë¥¼ ì„ íƒí•˜ëŠ” í•¨ìˆ˜
 function getPrevDay(dateStr) {
     const date = new Date(dateStr);
     date.setDate(date.getDate() - 1);
     return date.toISOString().split('T')[0];
 }
 
-// ´ÙÀ½ ³¯Â¥¸¦ ¼±ÅÃÇÏ´Â ÇÔ¼ö
+// ë‹¤ìŒ ë‚ ì§œë¥¼ ì„ íƒí•˜ëŠ” í•¨ìˆ˜
 function getNextDay(dateStr) {
     const date = new Date(dateStr);
     date.setDate(date.getDate() + 1);
     return date.toISOString().split('T')[0];
 }
 
-// ÃÊ±âÈ­ ÇÔ¼ö
+// ì„œë²„ì—ì„œ í˜„ì¬ ë‚ ì§œë¥¼ ê°€ì ¸ì˜¤ëŠ” í•¨ìˆ˜
+function fetchCurrentDate() {
+    return fetch('/api/current-date')
+        .then(response => response.json())
+        .then(data => data.currentDate);
+}
+
+// ì´ˆê¸°í™” í•¨ìˆ˜
 function init() {
-    let currentDate = getCurrentDate();
-    fetchMenu(currentDate);
-
-    document.getElementById('prev-day').addEventListener('click', () => {
-        currentDate = getPrevDay(currentDate);
+    fetchCurrentDate().then(currentDate => {
         fetchMenu(currentDate);
-    });
 
-    document.getElementById('next-day').addEventListener('click', () => {
-        currentDate = getNextDay(currentDate);
-        fetchMenu(currentDate);
+        document.getElementById('prev-day').addEventListener('click', () => {
+            currentDate = getPrevDay(currentDate);
+            fetchMenu(currentDate);
+        });
+
+        document.getElementById('next-day').addEventListener('click', () => {
+            currentDate = getNextDay(currentDate);
+            fetchMenu(currentDate);
+        });
     });
 }
 
-// DOMContentLoaded ÀÌº¥Æ®°¡ ¹ß»ıÇÏ¸é init ÇÔ¼ö ½ÇÇà
+// DOMContentLoaded ì´ë²¤íŠ¸ê°€ ë°œìƒí•˜ë©´ init í•¨ìˆ˜ ì‹¤í–‰
 document.addEventListener('DOMContentLoaded', init);
