@@ -1,10 +1,12 @@
 // 현재 날짜를 YYYY-MM-DD 형식으로 반환하는 함수
 function getCurrentDate() {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, '0');
-    const day = String(today.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
+    return fetch('/api/current-date')
+        .then(response => response.json())
+        .then(data => data.currentDate)
+        .catch(error => {
+            console.error('Error fetching current date:', error);
+            return new Date().toISOString().split('T')[0];
+        });
 }
 
 // 날짜 포맷을 원하는 형식으로 변환하는 함수
@@ -47,27 +49,19 @@ function getNextDay(dateStr) {
     return date.toISOString().split('T')[0];
 }
 
-// 서버에서 현재 날짜를 가져오는 함수
-function fetchCurrentDate() {
-    return fetch('/api/current-date')
-        .then(response => response.json())
-        .then(data => data.currentDate);
-}
-
 // 초기화 함수
-function init() {
-    fetchCurrentDate().then(currentDate => {
+async function init() {
+    let currentDate = await getCurrentDate();
+    fetchMenu(currentDate);
+
+    document.getElementById('prev-day').addEventListener('click', () => {
+        currentDate = getPrevDay(currentDate);
         fetchMenu(currentDate);
+    });
 
-        document.getElementById('prev-day').addEventListener('click', () => {
-            currentDate = getPrevDay(currentDate);
-            fetchMenu(currentDate);
-        });
-
-        document.getElementById('next-day').addEventListener('click', () => {
-            currentDate = getNextDay(currentDate);
-            fetchMenu(currentDate);
-        });
+    document.getElementById('next-day').addEventListener('click', () => {
+        currentDate = getNextDay(currentDate);
+        fetchMenu(currentDate);
     });
 }
 
