@@ -1,12 +1,10 @@
 // 현재 날짜를 YYYY-MM-DD 형식으로 반환하는 함수
 function getCurrentDate() {
-    return fetch('/api/current-date')
-        .then(response => response.json())
-        .then(data => data.currentDate)
-        .catch(error => {
-            console.error('Error fetching current date:', error);
-            return new Date().toISOString().split('T')[0];
-        });
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
 }
 
 // 날짜 포맷을 원하는 형식으로 변환하는 함수
@@ -50,8 +48,8 @@ function getNextDay(dateStr) {
 }
 
 // 초기화 함수
-async function init() {
-    let currentDate = await getCurrentDate();
+function init() {
+    let currentDate = getCurrentDate();
     fetchMenu(currentDate);
 
     document.getElementById('prev-day').addEventListener('click', () => {
