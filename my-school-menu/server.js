@@ -5,7 +5,7 @@ const PORT = process.env.PORT || 3000;
 
 // 나이스 API 호출 함수
 async function fetchMenuFromAPI(date) {
-    const url = `https://open.neis.go.kr/hub/mealServiceDietInfo?key=09688b9dfd7f46c1adce51e6ea9ea401&type=json&pIndex=1&pSize=10&ATPT_OFCDC_SC_CODE=J10&SD_SCHUL_CODE=7531379&MLSV_FROM_YMD=20240629&MLSV_TO_YMD=20240731`;
+    const url = `https://open.neis.go.kr/hub/mealServiceDietInfo?key=09688b9dfd7f46c1adce51e6ea9ea401&type=json&pIndex=1&pSize=10&ATPT_OFCDC_SC_CODE=J10&SD_SCHUL_CODE=7531379&MLSV_FROM_YMD=20240624&MLSV_TO_YMD=20240731`;
     const params = {
         schoolCode: '7531379',
         areaCode: 'J10',
