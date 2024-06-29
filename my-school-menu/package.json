@@ -1,8 +1,7 @@
-Add-Content package.json @"
 {
   "name": "my-school-menu",
   "version": "1.0.0",
-  "description": "¿ì¸® ÇĞ±³ ±Ş½Ä ¸Ş´º¸¦ º¸¿©ÁÖ´Â À¥»çÀÌÆ®",
+  "description": "ìš°ë¦¬ í•™êµ ê¸‰ì‹ ë©”ë‰´ë¥¼ ë³´ì—¬ì£¼ëŠ” ì›¹ì‚¬ì´íŠ¸",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
@@ -11,4 +10,3 @@ Add-Content package.json @"
     "express": "^4.18.2"
   }
 }
-"@
