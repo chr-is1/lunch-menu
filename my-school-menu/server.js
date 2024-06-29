@@ -25,16 +25,13 @@ app.get('/api/menu/:date', async (req, res) => {
     const date = req.params.date;
     
     try {
-        // 나이스 API를 통해 데이터 가져오기
         const apiData = await fetchMenuFromAPI(date);
-        const menu = apiData.menu || []; // 실제 API 응답에서 메뉴 데이터 추출
+        const menu = apiData.menu || [];
         
-        // 메뉴 데이터가 없을 경우 기본값 설정
         if (menu.length === 0) {
             menu.push('메뉴 정보가 없습니다.');
         }
 
-        // 클라이언트에게 JSON 형식으로 응답 보내기
         res.json({ menu });
     } catch (error) {
         console.error('Error fetching menu:', error.message);
@@ -42,10 +39,8 @@ app.get('/api/menu/:date', async (req, res) => {
     }
 });
 
-// 정적 파일 서빙
 app.use(express.static('public'));
 
-// 서버 시작
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
